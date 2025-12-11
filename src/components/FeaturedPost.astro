@@ -1,0 +1,106 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getDesignTokens } from '../config/siteSettings';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, author, category, featuredImage } = post.data;
+const { colors } = getDesignTokens();
+const avatarBgColor = colors.primary.replace('#', '');
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+}
+
+function getReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+
+function getCategoryColor(category: string): { bg: string; text: string } {
+  let hash = 0;
+  for (let i = 0; i < category.length; i++) {
+    hash = category.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const hue = Math.abs(hash % 360);
+  return {
+    bg: `hsla(${hue}, 70%, 50%, 0.1)`,
+    text: `hsl(${hue}, 70%, 40%)`
+  };
+}
+
+const readingTime = getReadingTime(post.body || '');
+const categoryColor = getCategoryColor(category);
+---
+
+<article class="rounded-2xl overflow-hidden shadow-lg" style="background-color: var(--color-surface);">
+  <div class="grid md:grid-cols-2 gap-0">
+    <a href={`/blog/${post.id}`} class="block relative overflow-hidden">
+      <div class="h-64 md:h-full min-h-[300px]">
+        {featuredImage ? (
+          <img 
+            src={featuredImage}
+            alt={title}
+            class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            loading="eager"
+            width="600"
+            height="400"
+          />
+        ) : (
+          <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(to bottom right, var(--color-primary-light), var(--color-accent));">
+            <svg class="w-24 h-24" style="color: var(--color-primary);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+        )}
+      </div>
+    </a>
+    
+    <div class="p-8 md:p-10 flex flex-col justify-center">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="tag" style={`background-color: ${categoryColor.bg}; color: ${categoryColor.text};`}>{category.replace('-', ' ')}</span>
+        <span style="color: var(--color-text-muted);">•</span>
+        <span class="text-sm" style="color: var(--color-text-muted);">{readingTime} min read</span>
+      </div>
+      
+      <a href={`/blog/${post.id}`}>
+        <h2 class="text-2xl md:text-3xl font-bold mb-4 featured-title transition-colors leading-tight" style="color: var(--color-text-primary);">
+          {title}
+        </h2>
+      </a>
+      
+      <p class="mb-6 line-clamp-3" style="color: var(--color-text-secondary);">
+        {description}
+      </p>
+      
+      <div class="flex items-center gap-3 mt-auto">
+        <img 
+          src={author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=${avatarBgColor}&color=fff&size=40`}
+          alt={author.name}
+          class="w-10 h-10 rounded-full"
+          loading="lazy"
+          width="40"
+          height="40"
+        />
+        <div>
+          <p class="font-medium" style="color: var(--color-text-primary);">{author.name}</p>
+          <p class="text-sm" style="color: var(--color-text-muted);">{formatDate(pubDate)}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .featured-title:hover {
+    color: var(--color-primary) !important;
+  }
+</style>

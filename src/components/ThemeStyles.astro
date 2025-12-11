@@ -1,0 +1,41 @@
+---
+import { getDesignTokens } from '../config/siteSettings';
+
+const tokens = getDesignTokens();
+const { colors, typography, spacing, borderRadius, shadows } = tokens;
+
+const cssVariables = `
+  :root {
+    --color-primary: ${colors.primary};
+    --color-primary-hover: ${colors.primaryHover};
+    --color-primary-light: ${colors.primaryLight};
+    --color-secondary: ${colors.secondary};
+    --color-accent: ${colors.accent};
+    --color-background: ${colors.background};
+    --color-surface: ${colors.surface};
+    --color-text-primary: ${colors.text.primary};
+    --color-text-secondary: ${colors.text.secondary};
+    --color-text-muted: ${colors.text.muted};
+    --color-text-inverse: ${colors.text.inverse};
+    --color-border: ${colors.border};
+    --color-success: ${colors.success};
+    --color-warning: ${colors.warning};
+    --color-error: ${colors.error};
+    --font-sans: ${typography.fontFamily.sans};
+    --font-serif: ${typography.fontFamily.serif};
+    --font-mono: ${typography.fontFamily.mono};
+    --shadow-sm: ${shadows.sm};
+    --shadow-md: ${shadows.md};
+    --shadow-lg: ${shadows.lg};
+    --shadow-xl: ${shadows.xl};
+    --radius-sm: ${borderRadius.sm};
+    --radius-md: ${borderRadius.md};
+    --radius-lg: ${borderRadius.lg};
+    --radius-xl: ${borderRadius.xl};
+    --radius-2xl: ${borderRadius['2xl']};
+    --radius-full: ${borderRadius.full};
+  }
+`;
+---
+
+<Fragment set:html={`<style>${cssVariables}</style>`} />

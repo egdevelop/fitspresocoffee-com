@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeaturedPost from '../components/FeaturedPost.astro';
+import BlogCard from '../components/BlogCard.astro';
+import AdPlacement from '../components/AdPlacement.astro';
+import { getCollection } from 'astro:content';
+import { getContentDefaults, getSiteSettings } from '../config/siteSettings';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const featuredPost = sortedPosts.find(post => post.data.featured) || sortedPosts[0];
+const recentPosts = sortedPosts.filter(post => post !== featuredPost).slice(0, 6);
+
+const { homepage } = getContentDefaults();
+const { features } = getSiteSettings();
+---
+
+<BaseLayout title="Home">
+  <!-- Hero Section -->
+  <section class="py-16 md:py-20" style="background-color: var(--color-surface);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--color-text-primary);">
+          {homepage.heroTitle}
+        </h1>
+        <p class="text-xl max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+          {homepage.heroSubtitle}
+        </p>
+      </div>
+      
+      <!-- Featured Post -->
+      {featuredPost && <FeaturedPost post={featuredPost} />}
+
+      <!-- Ad Placement: After Featured Post -->
+      <div class="max-w-4xl mx-auto mt-12">
+        <AdPlacement type="horizontal" slot="home-top" />
+      </div>
+    </div>
+  </section>
+  
+  <!-- Recent Posts Grid -->
+  <section class="py-16" style="background-color: var(--color-background);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-10">
+        <h2 class="text-2xl font-bold" style="color: var(--color-text-primary);">All blog posts</h2>
+        <a href="/blog" class="font-medium text-sm flex items-center gap-1 view-all-link" style="color: var(--color-primary);">
+          View all
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {recentPosts.map((post) => (
+          <div 
+            data-blog-card
+            data-title={post.data.title}
+            data-description={post.data.description}
+            data-category={post.data.category}
+          >
+            <BlogCard post={post} />
+          </div>
+        ))}
+      </div>
+
+      <!-- Ad Placement: After Blog Grid -->
+      <div class="max-w-4xl mx-auto mt-12">
+        <AdPlacement type="horizontal" slot="home-bottom" />
+      </div>
+    </div>
+  </section>
+  
+  <!-- Newsletter Section -->
+  {features.enableNewsletter && (
+    <section class="py-16" style="background-color: var(--color-surface);">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold mb-4" style="color: var(--color-text-primary);">
+          Subscribe to our newsletter
+        </h2>
+        <p class="mb-8" style="color: var(--color-text-secondary);">
+          Get the latest articles and insights delivered straight to your inbox.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="flex-1 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 newsletter-input"
+            style="border: 1px solid var(--color-border);"
+            required
+          />
+          <button type="submit" class="btn btn-primary">
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .view-all-link:hover {
+    color: var(--color-primary-hover) !important;
+  }
+  .newsletter-input:focus {
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
+</style>

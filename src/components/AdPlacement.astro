@@ -1,0 +1,35 @@
+---
+interface Props {
+  type: 'horizontal' | 'vertical' | 'square' | 'in-article';
+  slot?: string;
+}
+
+const { type, slot = '' } = Astro.props;
+
+const sizeClasses = {
+  'horizontal': 'w-full h-24 md:h-28',
+  'vertical': 'w-full h-64 md:w-[300px] md:h-[600px]',
+  'square': 'w-full max-w-[336px] h-[280px]',
+  'in-article': 'w-full h-32'
+};
+---
+
+<div class={`ad-placement ${sizeClasses[type]} border-2 border-dashed rounded-lg flex items-center justify-center my-6`} style="background-color: var(--color-background); border-color: var(--color-border);">
+  <div class="text-center" style="color: var(--color-text-muted);">
+    <svg class="w-8 h-8 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+    <p class="text-xs font-medium">Advertisement</p>
+    {slot && <p class="text-xs opacity-60">Slot: {slot}</p>}
+  </div>
+</div>
+
+<style>
+  .ad-placement {
+    transition: all 0.2s ease;
+  }
+  .ad-placement:hover {
+    border-color: var(--color-text-muted);
+    background-color: var(--color-border);
+  }
+</style>

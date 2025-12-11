@@ -1,0 +1,96 @@
+---
+import { getNavigation, getSiteSettings } from '../config/siteSettings';
+
+const { header: navItems } = getNavigation();
+const { siteName, logo } = getSiteSettings();
+const currentPath = Astro.url.pathname;
+---
+
+<header class="shadow-sm sticky top-0 z-50" style="background-color: var(--color-surface);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        {logo.type === 'image' ? (
+          <img 
+            src={logo.image} 
+            alt={`${logo.text} logo`}
+            width={logo.width}
+            height={logo.height}
+            class="object-contain"
+          />
+        ) : (
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));">
+            <span class="font-bold text-lg" style="color: var(--color-text-inverse);">{logo.text.charAt(0)}</span>
+          </div>
+        )}
+        {logo.showText && (
+          <span class="text-xl font-bold" style="color: var(--color-text-primary);">{logo.text}</span>
+        )}
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-8">
+        {navItems.map((item) => (
+          <a 
+            href={item.href}
+            class="text-sm font-medium transition-colors nav-link"
+            style={currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+                ? `color: var(--color-primary);` 
+                : `color: var(--color-text-secondary);`}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      
+      <!-- Mobile Menu Button -->
+      <button 
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg"
+        style="color: var(--color-text-secondary);"
+        aria-label="Toggle menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation -->
+  <nav id="mobile-menu" class="hidden md:hidden border-t" style="background-color: var(--color-surface); border-color: var(--color-border);">
+    <div class="px-4 py-4 space-y-3">
+      {navItems.map((item) => (
+        <a 
+          href={item.href}
+          class="block py-2 text-sm font-medium"
+          style={currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+              ? `color: var(--color-primary);` 
+              : `color: var(--color-text-secondary);`}
+          target={item.external ? '_blank' : undefined}
+          rel={item.external ? 'noopener noreferrer' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<style>
+  .nav-link:hover {
+    color: var(--color-text-primary) !important;
+  }
+</style>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

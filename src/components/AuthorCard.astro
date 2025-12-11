@@ -1,0 +1,28 @@
+---
+interface Props {
+  author: {
+    name: string;
+    avatar?: string;
+  };
+}
+
+const { author } = Astro.props;
+---
+
+<div class="bg-gray-50 rounded-xl p-6 flex items-start gap-4">
+  <img 
+    src={author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=E11D48&color=fff&size=80`}
+    alt={author.name}
+    class="w-16 h-16 rounded-full flex-shrink-0"
+    loading="lazy"
+    width="64"
+    height="64"
+  />
+  <div>
+    <p class="text-sm text-gray-500 mb-1">Written by</p>
+    <h4 class="font-semibold text-gray-900 text-lg">{author.name}</h4>
+    <p class="text-sm text-gray-600 mt-2">
+      Passionate writer and content creator with expertise in technology, design, and business insights.
+    </p>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+{
+  "name": "riven-blog",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0 --port 5000",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.14",
+    "@astrojs/sitemap": "^3.6.0",
+    "@octokit/rest": "^22.0.1",
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^5.16.2",
+    "fuse.js": "^7.1.0",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.17"
+  }
+}

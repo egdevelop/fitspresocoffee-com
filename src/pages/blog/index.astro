@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import SearchBar from '../../components/SearchBar.astro';
+import CategoryFilter from '../../components/CategoryFilter.astro';
+import FeaturedPost from '../../components/FeaturedPost.astro';
+import AdPlacement from '../../components/AdPlacement.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const featuredPost = sortedPosts.find(post => post.data.featured) || sortedPosts[0];
+const otherPosts = sortedPosts.filter(post => post !== featuredPost);
+
+const categories = [...new Set(allPosts.map(post => post.data.category))];
+---
+
+<BaseLayout title="Blog" description="Explore all our blog posts covering technology, design, research, and more.">
+  <section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Page Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Our Blogs
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          A center for all our resources & insights
+        </p>
+      </div>
+      
+      <!-- Search Bar -->
+      <div class="max-w-xl mx-auto mb-12">
+        <SearchBar />
+      </div>
+      
+      <!-- Featured Post -->
+      {featuredPost && (
+        <div class="mb-16">
+          <FeaturedPost post={featuredPost} />
+        </div>
+      )}
+
+      <!-- Ad Placement: After Featured Post -->
+      <div class="max-w-4xl mx-auto mb-12">
+        <AdPlacement type="horizontal" slot="blog-listing-top" />
+      </div>
+      
+      <!-- Category Filter -->
+      <div class="mb-8">
+        <CategoryFilter categories={categories} />
+      </div>
+      
+      <!-- Blog Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {otherPosts.map((post) => (
+          <div 
+            data-blog-card
+            data-title={post.data.title}
+            data-description={post.data.description}
+            data-category={post.data.category}
+          >
+            <BlogCard post={post} />
+          </div>
+        ))}
+      </div>
+      
+      {otherPosts.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-gray-500">No blog posts found.</p>
+        </div>
+      )}
+
+      <!-- Ad Placement: After Blog Grid -->
+      <div class="max-w-4xl mx-auto mt-12">
+        <AdPlacement type="horizontal" slot="blog-listing-bottom" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
