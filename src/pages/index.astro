@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FeaturedPost from '../components/FeaturedPost.astro';
 import BlogCard from '../components/BlogCard.astro';
-import AdPlacement from '../components/AdPlacement.astro';
+import AdsPlacement from '../components/AdsPlacement.astro';
 import { getCollection } from 'astro:content';
 import { getContentDefaults, getSiteSettings } from '../config/siteSettings';
 
@@ -33,7 +33,7 @@ const { features } = getSiteSettings();
 
       <!-- Ad Placement: After Featured Post -->
       <div class="max-w-4xl mx-auto mt-12">
-        <AdPlacement type="horizontal" slot="home-top" />
+        <AdsPlacement location="beforeContent" />
       </div>
     </div>
   </section>
@@ -66,7 +66,7 @@ const { features } = getSiteSettings();
 
       <!-- Ad Placement: After Blog Grid -->
       <div class="max-w-4xl mx-auto mt-12">
-        <AdPlacement type="horizontal" slot="home-bottom" />
+        <AdsPlacement location="afterContent" />
       </div>
     </div>
   </section>
