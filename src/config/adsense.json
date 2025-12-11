@@ -5,34 +5,39 @@
   "headerScript": "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5723093825971507\" crossorigin=\"anonymous\"></script>",
   "adCodes": {
     "header": {
-      "slot": "",
+      "slot": "9385941900",
       "format": "auto",
+      "layout": "",
       "responsive": true
     },
-    "beforeContent": {
-      "slot": "",
+    "sidebar": {
+      "slot": "9385941900",
       "format": "auto",
+      "layout": "",
       "responsive": true
     },
     "inArticle": {
-      "slot": "",
+      "slot": "9385941900",
       "format": "fluid",
       "layout": "in-article",
       "responsive": true
     },
-    "afterContent": {
-      "slot": "",
-      "format": "auto",
-      "responsive": true
-    },
-    "sidebar": {
-      "slot": "",
-      "format": "auto",
-      "responsive": true
-    },
     "footer": {
-      "slot": "",
+      "slot": "9385941900",
       "format": "horizontal",
+      "layout": "",
+      "responsive": true
+    },
+    "beforeContent": {
+      "slot": "9385941900",
+      "format": "auto",
+      "layout": "",
+      "responsive": true
+    },
+    "afterContent": {
+      "slot": "9385941900",
+      "format": "auto",
+      "layout": "",
       "responsive": true
     }
   }
