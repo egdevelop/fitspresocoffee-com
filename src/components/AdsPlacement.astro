@@ -1,5 +1,5 @@
 ---
-import { isAdsenseEnabled, getAdCode, type AdSlot } from '../utils/adsense';
+import { isAdsenseEnabled, getAdConfig, getPublisherId, type AdSlot } from '../utils/adsense';
 
 interface Props {
   location: AdSlot;
@@ -9,19 +9,32 @@ interface Props {
 const { location, class: className = '' } = Astro.props;
 
 const enabled = isAdsenseEnabled();
-const adCode = getAdCode(location);
-const shouldShow = enabled && adCode && adCode.trim() !== '';
+const adConfig = getAdConfig(location);
+const publisherId = getPublisherId();
+const shouldShow = enabled && adConfig && adConfig.slot;
 ---
 
-{shouldShow && (
+{shouldShow && adConfig && (
   <div class={`ads-placement ads-${location} ${className}`}>
-    <Fragment set:html={adCode} />
+    <ins 
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={publisherId}
+      data-ad-slot={adConfig.slot}
+      data-ad-format={adConfig.format || 'auto'}
+      data-full-width-responsive={adConfig.responsive !== false ? 'true' : 'false'}
+      {...(adConfig.layout ? { 'data-ad-layout': adConfig.layout } : {})}
+    ></ins>
+    <script is:inline>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </div>
 )}
 
 <style>
   .ads-placement {
     margin: 1rem 0;
+    text-align: center;
   }
   .ads-header {
     margin: 0.5rem 0;
@@ -38,5 +51,8 @@ const shouldShow = enabled && adCode && adCode.trim() !== '';
   }
   .ads-sidebar {
     margin: 1rem 0;
+  }
+  .adsbygoogle {
+    display: block;
   }
 </style>
