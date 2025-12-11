@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "publisherId": "ca-pub-5723093825971507",
+  "autoAdsEnabled": true,
+  "slots": {
+    "header": "9385941900",
+    "sidebar": "9385941900",
+    "inArticle": "9385941900",
+    "footer": "9385941900"
+  }
+}
