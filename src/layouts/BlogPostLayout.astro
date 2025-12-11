@@ -3,7 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import ShareButtons from '../components/ShareButtons.astro';
-import AdPlacement from '../components/AdPlacement.astro';
+import AdsPlacement from '../components/AdsPlacement.astro';
 import { getDesignTokens } from '../config/siteSettings';
 import type { CollectionEntry } from 'astro:content';
 
@@ -104,16 +104,19 @@ const categoryColor = getCategoryColor(category);
       </figure>
     )}
 
-    <!-- Ad Placement: After Featured Image -->
-    <AdPlacement type="horizontal" slot="post-top" />
+    <!-- Ad Placement: Before Content -->
+    <AdsPlacement location="beforeContent" />
     
     <!-- Article Content -->
     <div class="prose mx-auto">
       <slot />
     </div>
 
+    <!-- Ad Placement: In Article -->
+    <AdsPlacement location="inArticle" />
+
     <!-- Ad Placement: After Content -->
-    <AdPlacement type="in-article" slot="post-bottom" />
+    <AdsPlacement location="afterContent" />
     
     <!-- Share Buttons -->
     <div class="mt-12 pt-8 border-t border-gray-200">
@@ -126,11 +129,6 @@ const categoryColor = getCategoryColor(category);
     </div>
   </article>
   
-  <!-- Ad Placement: Before Related Posts -->
-  <div class="max-w-4xl mx-auto px-4">
-    <AdPlacement type="horizontal" slot="before-related" />
-  </div>
-
   <!-- Related Posts -->
   {relatedPosts.length > 0 && (
     <section class="bg-white py-16">

@@ -1,50 +1,39 @@
-let adsenseConfig: AdsenseConfig = {
-  enabled: false,
-  publisherId: "",
-  autoAdsEnabled: false,
-  headerScript: "",
-  adCodes: {}
-};
+import adsenseConfig from '../config/adsense.json';
 
-try {
-  // @ts-ignore
-  const imported = await import('../config/adsense.json');
-  adsenseConfig = imported.default || imported;
-} catch (e) {
-  // File doesn't exist, use defaults
-}
+export type AdSlot = 'header' | 'beforeContent' | 'inArticle' | 'afterContent' | 'sidebar' | 'footer';
 
-export interface AdsenseConfig {
+interface AdsenseConfig {
   enabled: boolean;
   publisherId: string;
   autoAdsEnabled: boolean;
-  headerScript?: string;
-  adCodes?: {
-    header?: string;
-    sidebar?: string;
-    inArticle?: string;
-    footer?: string;
-    beforeContent?: string;
-    afterContent?: string;
-  };
+  headerScript: string;
+  adCodes: Record<AdSlot, string>;
 }
 
+const config: AdsenseConfig = adsenseConfig as AdsenseConfig;
+
 export function isAdsenseEnabled(): boolean {
-  return adsenseConfig.enabled === true;
+  return config.enabled === true;
 }
 
 export function getHeaderScript(): string {
-  return adsenseConfig.headerScript || '';
+  if (!isAdsenseEnabled()) {
+    return '';
+  }
+  return config.headerScript || '';
 }
 
-export function getAdCode(slot: 'header' | 'sidebar' | 'inArticle' | 'footer' | 'beforeContent' | 'afterContent'): string {
-  return adsenseConfig.adCodes?.[slot] || '';
+export function getAdCode(slot: AdSlot): string {
+  if (!isAdsenseEnabled()) {
+    return '';
+  }
+  return config.adCodes[slot] || '';
 }
 
 export function getPublisherId(): string {
-  return adsenseConfig.publisherId || '';
+  return config.publisherId || '';
 }
 
 export function isAutoAdsEnabled(): boolean {
-  return adsenseConfig.autoAdsEnabled === true;
+  return config.autoAdsEnabled === true;
 }

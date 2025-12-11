@@ -1,11 +1,15 @@
 ---
 import { getNavigation, getSocialLinks, getSiteSettings } from '../config/siteSettings';
+import AdsPlacement from './AdsPlacement.astro';
 
 const currentYear = new Date().getFullYear();
 const { footer: footerGroups } = getNavigation();
 const socialLinks = getSocialLinks();
 const { siteName, siteTagline, logo } = getSiteSettings();
 ---
+
+<!-- Footer Ad Placement -->
+<AdsPlacement location="footer" />
 
 <footer style="background-color: var(--color-secondary); color: var(--color-text-muted);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

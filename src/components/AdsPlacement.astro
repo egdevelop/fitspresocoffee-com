@@ -1,0 +1,42 @@
+---
+import { isAdsenseEnabled, getAdCode, type AdSlot } from '../utils/adsense';
+
+interface Props {
+  location: AdSlot;
+  class?: string;
+}
+
+const { location, class: className = '' } = Astro.props;
+
+const enabled = isAdsenseEnabled();
+const adCode = getAdCode(location);
+const shouldShow = enabled && adCode && adCode.trim() !== '';
+---
+
+{shouldShow && (
+  <div class={`ads-placement ads-${location} ${className}`}>
+    <Fragment set:html={adCode} />
+  </div>
+)}
+
+<style>
+  .ads-placement {
+    margin: 1rem 0;
+  }
+  .ads-header {
+    margin: 0.5rem 0;
+  }
+  .ads-footer {
+    margin: 1rem 0;
+  }
+  .ads-inArticle {
+    margin: 2rem 0;
+  }
+  .ads-beforeContent,
+  .ads-afterContent {
+    margin: 1.5rem 0;
+  }
+  .ads-sidebar {
+    margin: 1rem 0;
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 import { getNavigation, getSiteSettings } from '../config/siteSettings';
+import AdsPlacement from './AdsPlacement.astro';
 
 const { header: navItems } = getNavigation();
 const { siteName, logo } = getSiteSettings();
@@ -79,6 +80,9 @@ const currentPath = Astro.url.pathname;
     </div>
   </nav>
 </header>
+
+<!-- Header Ad Placement -->
+<AdsPlacement location="header" />
 
 <style>
   .nav-link:hover {
