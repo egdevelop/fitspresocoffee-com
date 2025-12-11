@@ -3,6 +3,7 @@
   "publisherId": "ca-pub-5723093825971507",
   "autoAdsEnabled": false,
   "headerScript": "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5723093825971507\" crossorigin=\"anonymous\"></script>",
+  "adsTxt": "google.com, pub-5723093825971507, DIRECT, f08c47fec0942fa0",
   "adCodes": {
     "header": {
       "slot": "9385941900",
