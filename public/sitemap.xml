@@ -2,15 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.fitspresocoffee.com</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2025-12-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.fitspresocoffee.com/blog</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2025-12-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fitspresocoffee.com/blog/arabica-vs-robusta-untuk-espresso-mana-yang-lebih-enak-kuat</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.fitspresocoffee.com/blog/cara-dialing-in-espresso-panduan-anti-gagal-untuk-pemula</loc>
@@ -31,8 +37,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.fitspresocoffee.com/blog/duel-manual-espresso-maker-moka-pot-vs-flair-vs-aeropress</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fitspresocoffee.com/blog/espresso-pahit-ini-penyebab-cara-memperbaikinya-untuk-bisnis-kopi</loc>
+    <lastmod>2025-12-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.fitspresocoffee.com/blog/espresso-shot-berapa-ml-panduan-standar-rasio-cara-ukurnya</loc>
     <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fitspresocoffee.com/blog/espresso-terlalu-asam-kenali-penyebab-cara-mudah-mengatasinya</loc>
+    <lastmod>2025-12-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -67,38 +91,50 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.fitspresocoffee.com/blog/rasio-espresso-ideal-1-2-atau-1-3-panduan-lengkap-pemula</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.fitspresocoffee.com/blog/resep-espresso-tonic-viral-takaran-pas-tips-anti-gagal</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.fitspresocoffee.com/blog/tekanan-espresso-berapa-bar-kunci-rahasia-rasa-kopi-sempurna</loc>
+    <lastmod>2025-12-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.fitspresocoffee.com/about</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2025-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.fitspresocoffee.com/contact</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2025-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.fitspresocoffee.com/disclaimer</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2025-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.fitspresocoffee.com/privacy</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2025-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.fitspresocoffee.com/terms</loc>
-    <lastmod>2025-12-11</lastmod>
+    <lastmod>2025-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
